@@ -8,6 +8,9 @@ public class Account
     public string IBAN { get; set; }
     private decimal Balance { get; set; } //1000
 
+    public string Email { get; set; }
+    public string Password { get; set; }
+
     //15
     //15/1
 
