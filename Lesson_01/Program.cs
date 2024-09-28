@@ -1,18 +1,39 @@
 ﻿Console.WriteLine("Bank App");
 
+List<Account> accounts = new();
+
 Account account1 = new(400);
 account1.FirstName = "John";
 account1.LastName = "Doe";
 account1.PhoneNumber = "123456789";
 account1.IBAN = "TR123456789";
+accounts.Add(account1);
 
-account1.Withdraw(750);
-account1.Withdraw(300);
+Account account2 = new();
+account2.FirstName = "Jane";
+account2.LastName = "Doe";
+account2.PhoneNumber = "987654321";
+account2.IBAN = "TR987654321";
+accounts.Add(account2);
+
+string depositIBAN = "TR987654321";
+decimal depositAmount = 750;
+
+for (int i = 0; i < accounts.Count; i++)
+{
+    if (accounts[i].IBAN == depositIBAN)
+    {
+        accounts[i].Deposit(depositAmount);
+    }
+}
+
+Console.WriteLine($"John's Balance: {account1.GetBalance()}");
+Console.WriteLine($"Jane's Balance: {account2.GetBalance()}");
+
+// account1.Withdraw(750);
+// account1.Withdraw(300);
 // account1.Withdraw(10000);
-
-
-account1.Withdraw(750);
-System.Console.WriteLine();
+// account1.Withdraw(750);
 
 Console.WriteLine($"Balance: {account1.GetBalance()}");
 
@@ -49,6 +70,10 @@ class Account
         return Balance;
     }
 
+    public void Deposit(decimal amount)
+    {
+        Balance += amount;
+    }
     public void Withdraw(decimal amount) //1500
     {
         //Balance: 1000
