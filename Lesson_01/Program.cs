@@ -5,16 +5,14 @@ Console.WriteLine("Bank App");
 
 List<Account> accounts = new();
 
-Account account1 = new(300); //300
+Account account1 = new(300, "john@gmail.com", "123456"); //300
 account1.FirstName = "John";
 account1.LastName = "Doe";
 account1.PhoneNumber = "123456789";
 account1.IBAN = "TR123456789";
-account1.Email = "hakan@gmail.com";
-account1.Password = "123456";
 accounts.Add(account1);
 
-Account account2 = new(1000); //1000
+Account account2 = new(1000, "jane@gmail.com", "4321"); //1000
 account2.FirstName = "Jane";
 account2.LastName = "Doe";
 account2.PhoneNumber = "987654321";
@@ -24,19 +22,44 @@ accounts.Add(account2);
 string loggedInEmail = "";
 bool isLoggedIn = false;
 
-WriteLoginMenu();
-string choise = Console.ReadLine();
-
-if (choise == "1")
+while(true)
 {
-    Console.WriteLine("Enter your Email:");
-    string email = Console.ReadLine();
+    if (!isLoggedIn)
+    {
+        WriteLoginMenu();
+        string choise = Console.ReadLine();
 
-    Console.WriteLine("Enter your Password:");
-    string password = Console.ReadLine();
+        if (choise == "1")
+        {
+            Console.WriteLine("Enter your Email:");
+            string email = Console.ReadLine();
 
-    LoginAccount(email, password);
+            Console.WriteLine("Enter your Password:");
+            string password = Console.ReadLine();
+
+            LoginAccount(email, password);
+        }
+
+        else if (choise == "2")
+        {
+            Account accountToAdd = new(300, "john@gmail.com", "123456"); //300
+            Console.WriteLine("Enter your First Name:");
+            account1.FirstName = Console.ReadLine();
+            account1.FirstName = "John";
+            account1.LastName = "Doe";
+            account1.PhoneNumber = "123456789";
+            account1.IBAN = "TR123456789";
+            accounts.Add(accountToAdd);
+        }
+    }
+    else
+    {
+        WriteMainMenu();
+        string choise = Console.ReadLine();
+
+    }
 }
+
 
 
 

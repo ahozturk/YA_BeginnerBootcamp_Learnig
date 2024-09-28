@@ -14,15 +14,20 @@ public class Account
     //15
     //15/1
 
-    public Account()
+    public Account(string email, string password)
     {
         Balance = 100;
+        Email = email;
+        Password = password;
     }
 
-    public Account(decimal balance)
+    public Account(decimal balance, string email, string password)
     {
         if (balance <= 1000)
             Balance = balance;
+
+        Email = email;
+        Password = password;
     }
 
     // public void SetBalance(decimal balance)
