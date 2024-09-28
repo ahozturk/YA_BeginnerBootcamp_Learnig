@@ -10,6 +10,8 @@ account1.FirstName = "John";
 account1.LastName = "Doe";
 account1.PhoneNumber = "123456789";
 account1.IBAN = "TR123456789";
+account1.Email = "hakan@gmail.com";
+account1.Password = "123456";
 accounts.Add(account1);
 
 Account account2 = new(1000); //1000
@@ -40,7 +42,7 @@ if (choise == "1")
 
 void WriteLoginMenu()
 {
-    Console.WriteLine("Choose an account:");
+    Console.WriteLine("Choose an option:");
     Console.WriteLine("1 - Login");
     Console.WriteLine("2 - Sign Up");
 }
@@ -62,23 +64,44 @@ void TransferMoney(Account sender, Account receiver, decimal amount)
 
 void LoginAccount(string email, string password)
 {
+    bool isAccountExist = false;
+    bool isPasswordCorrect = false;
+
     for (int i = 0; i < accounts.Count; i++)
     {
         if (accounts[i].Email == email)
         {
+            isAccountExist = true;
             if (accounts[i].Password == password)
             {
+                isPasswordCorrect = true;
                 isLoggedIn = true;
                 loggedInEmail = email;
+                break;
             }
             else
             {
-                Console.WriteLine("Invalid Password");
+                isPasswordCorrect = false;
             }
+            break;
         }
         else
         {
-            Console.WriteLine("Invalid Email");
+            isAccountExist = false;
         }
     }
+
+    if (!isAccountExist)
+    {
+        Console.WriteLine("Account does not exist");
+    }
+    else if (!isPasswordCorrect)
+    {
+        Console.WriteLine("Password is incorrect");
+    }
+    else 
+    {
+        Console.WriteLine("Login successful");
+    }
+    
 }
