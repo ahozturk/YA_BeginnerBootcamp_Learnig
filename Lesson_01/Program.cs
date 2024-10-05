@@ -49,8 +49,10 @@ while(true)
             string phoneNumber = Console.ReadLine();
 
             Account accountToAdd = new(300, email, password, firstName, lastName, phoneNumber);
-            
+
             accounts.Add(accountToAdd);
+
+            Console.WriteLine("Account created successfully");
         }
     }
     else
