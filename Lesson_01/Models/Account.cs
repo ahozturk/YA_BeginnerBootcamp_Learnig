@@ -14,6 +14,9 @@ public class Account
     //15
     //15/1
 
+    Random random = new();
+
+
     public Account(string email, string password)
     {
         Balance = 100;
@@ -22,7 +25,6 @@ public class Account
     }
 
     public Account(decimal balance, string email, string password, string firstName, string lastName, string phoneNumber)
-    
     {
         if (balance <= 1000)
             Balance = balance;
@@ -32,8 +34,6 @@ public class Account
         FirstName = firstName;
         LastName = lastName;
         PhoneNumber = phoneNumber;
-        
-        Random random = new();
 
         IBAN = $"TR{random.Next(100_000_000, 999_999_999)}";
     }

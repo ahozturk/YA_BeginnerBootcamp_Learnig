@@ -10,8 +10,6 @@ accounts.Add(account1);
 Account account2 = new(1000, "jane@gmail.com", "4321", "Jane", "Doe", "987654321");
 accounts.Add(account2);
 
-Console.WriteLine(accounts[0].IBAN);
-
 string loggedInEmail = "";
 bool isLoggedIn = false;
 
@@ -35,13 +33,24 @@ while(true)
 
         else if (choise == "2")
         {
-            // Account accountToAdd = new(300, "john@gmail.com", "123456"); //300
-            // Console.WriteLine("Enter your First Name:");
-            // account1.FirstName = "John";
-            // account1.LastName = "Doe";
-            // account1.PhoneNumber = "123456789";
-            // account1.IBAN = "TR123456789";
-            // accounts.Add(accountToAdd);
+            Console.WriteLine("Enter your Email:");
+            string email = Console.ReadLine();
+
+            Console.WriteLine("Enter your Password:");
+            string password = Console.ReadLine();
+
+            Console.WriteLine("Enter your First Name:");
+            string firstName = Console.ReadLine();
+
+            Console.WriteLine("Enter your Last Name:");
+            string lastName = Console.ReadLine();
+
+            Console.WriteLine("Enter your Phone Number:");
+            string phoneNumber = Console.ReadLine();
+
+            Account accountToAdd = new(300, email, password, firstName, lastName, phoneNumber);
+            
+            accounts.Add(accountToAdd);
         }
     }
     else
