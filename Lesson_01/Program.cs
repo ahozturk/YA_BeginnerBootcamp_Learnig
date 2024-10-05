@@ -10,7 +10,7 @@ accounts.Add(account1);
 Account account2 = new(1000, "jane@gmail.com", "4321", "Jane", "Doe", "987654321");
 accounts.Add(account2);
 
-string loggedInEmail = "";
+Account loggedInAccount = null;
 bool isLoggedIn = false;
 
 while(true)
@@ -60,6 +60,18 @@ while(true)
         WriteMainMenu();
         string choise = Console.ReadLine();
 
+        if (choise == "1")
+        {
+            Console.WriteLine("Enter the amount you want to deposit:");
+            decimal amount = Convert.ToDecimal(Console.ReadLine());
+            
+            if (loggedInAccount != null)
+            {
+                loggedInAccount.Deposit(amount);
+                Console.WriteLine($"Your new balance is: {loggedInAccount.GetBalance()}");
+            }
+        }
+
     }
 }
 
@@ -102,7 +114,7 @@ void LoginAccount(string email, string password)
             {
                 isPasswordCorrect = true;
                 isLoggedIn = true;
-                loggedInEmail = email;
+                loggedInAccount = accounts[i];
                 break;
             }
             else
