@@ -36,6 +36,8 @@ public class Account
         PhoneNumber = phoneNumber;
 
         IBAN = $"TR{random.Next(100_000_000, 999_999_999)}";
+
+        Console.WriteLine($"{FirstName} Account created with IBAN: {IBAN}");
     }
 
     // public void SetBalance(decimal balance)
@@ -60,18 +62,21 @@ public class Account
         if (Balance >= amount)
         {
             Balance -= amount;
+
+            // Console.WriteLine($"Withdraw successful, new balance is: {Balance}");
+
             return amount;
         }
         else if (Balance != 0)
         {
-            Console.WriteLine($"Insufficient balance but you withdraw this amount: {Balance}");
+            // Console.WriteLine($"Insufficient balance but you withdraw this amount: {Balance}");
             decimal tempBalance = Balance; //1000
             Balance = 0; //0
             return tempBalance;
         }
         else
         {
-            Console.WriteLine("Insufficient balance");
+            // Console.WriteLine("Insufficient balance");
             return 0;
         }
     }

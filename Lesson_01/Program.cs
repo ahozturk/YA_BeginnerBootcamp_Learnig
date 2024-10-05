@@ -65,13 +65,61 @@ while(true)
             Console.WriteLine("Enter the amount you want to deposit:");
             decimal amount = Convert.ToDecimal(Console.ReadLine());
             
-            if (loggedInAccount != null)
+            if (loggedInAccount != null && amount > 0)
             {
                 loggedInAccount.Deposit(amount);
                 Console.WriteLine($"Your new balance is: {loggedInAccount.GetBalance()}");
             }
+            else
+            {
+                Console.WriteLine("Invalid amount, please enter a positive number");
+            }
         }
+        else if (choise == "2")
+        {
+            Console.WriteLine("Enter the amount you want to withdraw:");
+            decimal withdrawAmount = Convert.ToDecimal(Console.ReadLine());
+            
+            decimal withdrawResult = loggedInAccount.Withdraw(withdrawAmount);
 
+            if (withdrawResult == 0)
+            {
+                Console.WriteLine("Insufficient balance");
+            }
+            else if (withdrawResult == withdrawAmount)
+            {
+                Console.WriteLine($"Withdraw successful, new balance is: {loggedInAccount.GetBalance()}");
+            }
+            else
+            {
+                Console.WriteLine($"Insufficient balance but you withdraw this amount: {withdrawResult}");
+            }
+        }
+        else if (choise == "3")
+        {
+            Console.WriteLine("Enter the IBAN you want to transfer to:");
+            string iban = Console.ReadLine();
+
+            Console.WriteLine("Enter the amount you want to transfer:");
+            decimal withdrawAmount = Convert.ToDecimal(Console.ReadLine());
+
+            Account receiverAccount = null;
+
+            for (int i = 0; i < accounts.Count; i++)
+            {
+                if (accounts[i].IBAN == iban)
+                {
+                    receiverAccount = accounts[i];
+                    break;
+                }
+            }
+
+            TransferMoney(loggedInAccount, receiverAccount, withdrawAmount);
+        }
+        else if (choise == "4")
+        {
+            
+        }
     }
 }
 
@@ -98,6 +146,8 @@ void TransferMoney(Account sender, Account receiver, decimal amount)
 {
     decimal sendAmount = sender.Withdraw(amount);
     receiver.Deposit(sendAmount);
+
+    Console.WriteLine($"Transfer successful, new balance is: {sender.GetBalance()}");
 }
 
 void LoginAccount(string email, string password)
