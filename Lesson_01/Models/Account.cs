@@ -6,7 +6,8 @@ public class Account
     public string LastName { get; set; }
     public string PhoneNumber { get; set; }
     public string IBAN { get; set; }
-    private decimal Balance { get; set; } //1000
+    private decimal Balance { get; set; }
+    // public decimal Balance { get; private set; }
 
     public string Email { get; set; }
     public string Password { get; set; }

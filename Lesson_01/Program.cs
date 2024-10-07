@@ -7,6 +7,9 @@ List<Account> accounts = new();
 Account account1 = new(300, "john@gmail.com", "123456", "John", "Doe", "123456789");
 accounts.Add(account1);
 
+// account1.Balance = 1_000_000; //yazma - set
+// Console.WriteLine(account1.Balance); //okuma - get
+
 Account account2 = new(1000, "jane@gmail.com", "4321", "Jane", "Doe", "987654321");
 accounts.Add(account2);
 
@@ -48,7 +51,7 @@ while(true)
             Console.WriteLine("Enter your Phone Number:");
             string phoneNumber = Console.ReadLine();
 
-            Account accountToAdd = new(300, email, password, firstName, lastName, phoneNumber);
+            Account accountToAdd = new(100, email, password, firstName, lastName, phoneNumber);
 
             accounts.Add(accountToAdd);
 
@@ -118,7 +121,13 @@ while(true)
         }
         else if (choise == "4")
         {
-            
+            decimal balance = loggedInAccount.GetBalance();
+            Console.WriteLine($"Your balance is: {balance}");
+        }
+        else if (choise == "5")
+        {
+            isLoggedIn = false;
+            loggedInAccount = null;
         }
     }
 }
@@ -139,7 +148,8 @@ void WriteMainMenu()
     Console.WriteLine("1 - Deposit");
     Console.WriteLine("2 - Withdraw");
     Console.WriteLine("3 - Transfer");
-    Console.WriteLine("4 - Log Out");
+    Console.WriteLine("4 - Show Balance");
+    Console.WriteLine("5 - Log Out");
 }
 
 void TransferMoney(Account sender, Account receiver, decimal amount)
