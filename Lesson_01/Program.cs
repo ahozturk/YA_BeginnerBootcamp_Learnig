@@ -1,4 +1,5 @@
-﻿using Lesson_01.Models;
+﻿using Lesson_01.Helpers;
+using Lesson_01.Models;
 
 Console.WriteLine("Bank App");
 
@@ -16,7 +17,7 @@ accounts.Add(account2);
 Account loggedInAccount = null;
 bool isLoggedIn = false;
 
-while(true)
+while (true)
 {
     if (!isLoggedIn)
     {
@@ -36,8 +37,10 @@ while(true)
 
         else if (choise == "2")
         {
-            Console.WriteLine("Enter your Email:");
-            string email = Console.ReadLine();
+            // Console.WriteLine("Enter your Email:");
+            // string email = Console.ReadLine();
+
+            string email = InputHelper.GetInput("Enter your Email:");
 
             Console.WriteLine("Enter your Password:");
             string password = Console.ReadLine();
@@ -67,7 +70,7 @@ while(true)
         {
             Console.WriteLine("Enter the amount you want to deposit:");
             decimal amount = Convert.ToDecimal(Console.ReadLine());
-            
+
             if (loggedInAccount != null && amount > 0)
             {
                 loggedInAccount.Deposit(amount);
@@ -82,7 +85,7 @@ while(true)
         {
             Console.WriteLine("Enter the amount you want to withdraw:");
             decimal withdrawAmount = Convert.ToDecimal(Console.ReadLine());
-            
+
             decimal withdrawResult = loggedInAccount.Withdraw(withdrawAmount);
 
             if (withdrawResult == 0)
@@ -126,6 +129,34 @@ while(true)
         }
         else if (choise == "5")
         {
+            Console.WriteLine("Enter your current password:");
+            string currentPassword = Console.ReadLine();
+
+            if (currentPassword != loggedInAccount.Password)
+            {
+                Console.WriteLine("Password is incorrect, sign in again to change your password");
+                loggedInAccount = null;
+                isLoggedIn = false;
+                continue;
+            }
+
+            Console.WriteLine("Enter your new password:");
+            string newPassword = Console.ReadLine();
+
+            Console.WriteLine("Enter your new again password:");
+            string newPasswordAgain = Console.ReadLine();
+
+            if (newPassword != newPasswordAgain)
+            {
+                Console.WriteLine("Passwords do not match");
+                continue;
+            }
+
+            loggedInAccount.Password = newPassword;
+            Console.WriteLine("Password changed successfully");
+        }
+        else if (choise == "6")
+        {
             isLoggedIn = false;
             loggedInAccount = null;
         }
@@ -149,11 +180,14 @@ void WriteMainMenu()
     Console.WriteLine("2 - Withdraw");
     Console.WriteLine("3 - Transfer");
     Console.WriteLine("4 - Show Balance");
-    Console.WriteLine("5 - Log Out");
+    Console.WriteLine("5 - Change Password");
+    Console.WriteLine("6 - Log Out");
 }
 
 void TransferMoney(Account sender, Account receiver, decimal amount)
 {
+    //Tuana -> 1000 - transfer: "-1500" - john
+    //John -> 500 - transfer: "-1500" - Tuana
     decimal sendAmount = sender.Withdraw(amount);
     receiver.Deposit(sendAmount);
 
@@ -197,9 +231,9 @@ void LoginAccount(string email, string password)
     {
         Console.WriteLine("Password is incorrect");
     }
-    else 
+    else
     {
         Console.WriteLine("Login successful");
     }
-    
+
 }

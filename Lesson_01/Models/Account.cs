@@ -1,3 +1,5 @@
+using Lesson_01.Helpers;
+
 namespace Lesson_01.Models;
 
 public class Account
@@ -30,11 +32,13 @@ public class Account
         if (balance <= 1000)
             Balance = balance;
 
-        Email = email;
+        Email = email.ToLower();
         Password = password;
-        FirstName = firstName;
-        LastName = lastName;
-        PhoneNumber = phoneNumber;
+
+        FirstName = InputHelper.GetTextOnlyInput("Enter your First Name:");
+        LastName = InputHelper.GetTextOnlyInput("Enter your Last Name:");
+
+        PhoneNumber = InputHelper.GetNumberOnlyInput("Enter your Phone Number:");
 
         IBAN = $"TR{random.Next(100_000_000, 999_999_999)}";
 
@@ -58,9 +62,13 @@ public class Account
     }
     public decimal Withdraw(decimal amount) //1500
     {
-        //Balance: 0
-        //Amount: 1500
-        if (Balance >= amount)
+        //Balance: 1000
+        //Amount: -1500
+        if (amount <= 0)
+        {
+            return 0;
+        }
+        else if (Balance >= amount)
         {
             Balance -= amount;
 
