@@ -4,7 +4,7 @@ namespace Lesson_01.Helpers;
 
 public static class TextHelper
 {
-    public static bool IsDigit(string text) //"0530"
+    public static bool IsDigit(string text)
     {
         bool isTextValid = true;
 
